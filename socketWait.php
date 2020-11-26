@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-// © A.A.CheckMaRev assminog@gmail.com tubmulur@yandex.ru
+// © A.A.CheckMaRev assminog@gmail.com tubmulur@yandex.ru first sucsessfull run at Birthday of Gersan Gioev 26.11.2020
 require_once('/home/EDRO.SOT/System/0.Functions/0.strNDigit.php');
 
 $socket = stream_socket_server("tcp://127.0.0.1:8080", $errno, $errstr);
