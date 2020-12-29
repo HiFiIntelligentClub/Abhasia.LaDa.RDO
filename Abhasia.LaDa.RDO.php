@@ -3,7 +3,7 @@
 // © A.A.CheckMaRev assminog@gmail.com tubmulur@yandex.ru first sucsessfull run at Birthday of Gersan Gioev 26.11.2020
 require_once('/home/EDRO.SOT/System/0.Functions/0.strNDigit.php');
 
-$socket = stream_socket_server("tcp://127.0.0.1:8081", $errno, $errstr);
+$socket = stream_socket_server("tcp://hic:8081", $errno, $errstr);
 //socket_bind($socket, 'hic', 8081);
 while ($connect = stream_socket_accept($socket, -1))
     {
@@ -17,6 +17,7 @@ while ($connect = stream_socket_accept($socket, -1))
     if(isset($arrHeaders[0]))
 	{
 	$arrRequest	=explode(" ", $arrHeaders[0]);
+	print_r($arrRequest);
 	if(isset($arrRequest[1])&&$arrRequest[1]!="/favicon.ico")
 	    {
 	    $strRequest	=$arrRequest[1];
@@ -26,12 +27,13 @@ while ($connect = stream_socket_accept($socket, -1))
 		}
 	    //echo '/home/HiFiIntelligentClub.Ru/run.php '.$strRequest;
 	    exec('/home/HiFiIntelligentClub.Ru/run.php '.$strRequest, $arrOut);
-	    $strBuffer		=file_get_contents('/home/HiFiIntelligentClub.Ru/buf.html');
+	    //echo $strBuffer		=file_get_contents('/home/HiFiIntelligentClub.Ru/index.php ');
+	    
+	    foreach($arrOut as $strOut)
+	    	{
+	    	$strBuffer	.=$strOut;
+	    	}
 	    $strBufferLen	=strlen($strBuffer);
-	    //foreach($arrOut as $strOut)
-	    //	{
-	    //	$strBuffer	.=$strOut;
-	    //	}
 	    //echo $strBuffer;
 	    fwrite($connect, "HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia\r\nContent-Length:".$strBufferLen."\r\nConnection: close\r\n\r\n".$strBuffer);
 	    fclose($connect);
