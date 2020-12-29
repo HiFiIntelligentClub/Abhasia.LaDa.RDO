@@ -21,18 +21,22 @@ while ($connect = stream_socket_accept($socket, -1))
 	if(isset($arrRequest[1])&&$arrRequest[1]!="/favicon.ico")
 	    {
 	    $strRequest	=$arrRequest[1];
+	    unset($arrRequest);
 	    if(сНачОтДоСимвола($strRequest, '.', '?')=='jpg')
 		{
 		$strContentType		='Content-Type: image/jpeg';
 		}
 	    //echo '/home/HiFiIntelligentClub.Ru/run.php '.$strRequest;
 	    exec('/home/HiFiIntelligentClub.Ru/run.php '.$strRequest, $arrOut);
+	    unset($strRequest);
 	    //echo $strBuffer		=file_get_contents('/home/HiFiIntelligentClub.Ru/index.php ');
-	    
+	    $strOut='';
 	    foreach($arrOut as $strOut)
 	    	{
 	    	$strBuffer	.=$strOut;
 	    	}
+	    unset($arrOut);
+	    unset($strOut);
 	    $strBufferLen	=strlen($strBuffer);
 	    //echo $strBuffer;
 	    fwrite($connect, "HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia\r\nContent-Length:".$strBufferLen."\r\nConnection: close\r\n\r\n".$strBuffer);
