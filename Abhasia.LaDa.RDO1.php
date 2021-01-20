@@ -55,13 +55,13 @@ function мЗаголовкиВПеременные($_мЗапрос)
 	return $мЗапрос;
 	}
 
-function фЛоготипИконка()
+function фЛоготипИконка($_рПередача)
 	{
 	$faviconBin			=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
-	fwrite($connect, "HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
+	fwrite($_рПередача, "HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
 	unset($faviconBin);
 	}
-function фПостроитьПакетДанных($objKIIM)
+function фПостроитьПакетДанных($objKIIM, $_рПередача)
 	{
 	$strContentType		='Content-Type: text/html';
 	$objEDRO		=new Event($objKIIM);
@@ -83,8 +83,8 @@ function фПостроитьПакетДанных($objKIIM)
 	file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $strBuffer);
 
 	KIIM::objFinish($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_accept','_strVectorPoint'=>'',));
-	fwrite($connect,$strBuffer);
-	fclose($connect);
+	fwrite($_рПередача, $strBuffer);
+	fclose($_рПередача);
 	unset($strBuffer);
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,13 +116,13 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 			$objEDRO		=new Event($objKIIM);
 			//echo $objEDRO->arrDesign['strTemplate']."\n";
 			echo "7"."\n";
-			фПостроитьПакетДанных($objKIIM ,$objEDRO->arrEvent['bIzDynamic'], $objEDRO->arrDesign['strTemplate']);
+			фПостроитьПакетДанных($objKIIM, $рПередача);
 			echo "8"."\n";
 			}
 		elseif(isset($arrRequest[1])&&$arrRequest[1]=="/favicon.ico")
 			{
 			echo "9"."\n";
-			фПостроитьПакетДанныхЛоготипИконка();
+			фПостроитьПакетДанныхЛоготипИконка($рПередача);
 			echo "10"."\n";
 			}
 		else
