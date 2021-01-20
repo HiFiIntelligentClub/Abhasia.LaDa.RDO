@@ -36,6 +36,7 @@ function мЧтениеЗапросаИзБраузераСлушателя($_р
 	}
 function мЗаголовкиЗапроса($_мЗаголовки)
 	{
+	$мЗаголовки	=array();
 	if(isset($_мЗаголовки[0]))
 		{
 		$мЗаголовки	=explode(" ", $_мЗаголовки[0]);
@@ -60,13 +61,13 @@ function фЛоготипИконка()
 	fwrite($connect, "HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
 	unset($faviconBin);
 	}
-function фПостроитьПакетДанных($objKIIM, $bIzDynamic, $strTemplate)
+function фПостроитьПакетДанных($objKIIM)
 	{
 	$strContentType		='Content-Type: text/html';
 	$objEDRO		=new Event($objKIIM);
-	require_once		$strTemplate;
+	require_once		$objEDRO->arrDesign['strTemplate'];
 	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
-	if($bIzDynamic)
+	if($objEDRO->arrEvent['bIzDynamic'])
 		{
 		}
 	else
@@ -90,25 +91,39 @@ function фПостроитьПакетДанных($objKIIM, $bIzDynamic, $strT
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+echo "1"."\n";
 $рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
+echo "2"."\n";
 
 //$strBufferServerNotice		='<h1>Сервер Абхазия.LaDa,RDo</h1><AbhasiaServeWarning style="display:block;overflow:hidden;font-size:x-large;height:20px;line-height:19px;color:red;">Development version. For stable, visit <a href="http://HiFiIntelligentClub.COM">HiFiIntelligentClub.COM</a></AbhasiaServeWarning>';
 while ($рПередача = stream_socket_accept($рПриёмник, -1))
 	{$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_accept','_strVectorPoint'=>'',));
+	echo "3"."\n";
 
 	$мЗаголовкиСлушателя	=мЧтениеЗапросаИзБраузераСлушателя($рПередача);
+	print_r($мЗаголовкиСлушателя);
+	echo "4"."\n";
 
 	if(isset($мЗаголовкиСлушателя[0]))
 		{
-		$мЗаголовки		=мЗаголовкиЗапроса($_мЗаголовки);
+		echo "5"."\n";
+		$мЗаголовки		=мЗаголовкиЗапроса($мЗаголовкиСлушателя);
+		print_r($мЗаголовки);
+		echo "6"."\n";
 
 		if(isset($мЗаголовки[1])&&$мЗаголовки[1]!="/favicon.ico")
 			{
+			$objEDRO		=new Event($objKIIM);
+			//echo $objEDRO->arrDesign['strTemplate']."\n";
+			echo "7"."\n";
 			фПостроитьПакетДанных($objKIIM ,$objEDRO->arrEvent['bIzDynamic'], $objEDRO->arrDesign['strTemplate']);
+			echo "8"."\n";
 			}
 		elseif(isset($arrRequest[1])&&$arrRequest[1]=="/favicon.ico")
 			{
+			echo "9"."\n";
 			фПостроитьПакетДанныхЛоготипИконка();
+			echo "10"."\n";
 			}
 		else
 			{
