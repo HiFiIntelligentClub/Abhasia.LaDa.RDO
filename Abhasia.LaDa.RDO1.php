@@ -21,39 +21,52 @@ function рОрганизацияПриёмникаЗапросовСлушат�
 	KIIM::objFinish($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_server','_strVectorPoint'=>'',));
 	return $рПриёмникЗапросовСлушателя;
 	}
-function мЗапросИзБраузераСлушателя($_lnConnect)
+function мЧтениеЗапросаИзБраузераСлушателя($_рПередача)
 	{
-	$strConnect		=fread($_lnConnect, 512);
-	$arrHeaders		=explode("\n", $strConnect);
-	return $arrHeaders;
-	}
-function мЗаголовкиВПеременные($_мЗапрос)
-	{
-	$_мЗапрос	=array();
-	foreach($_мЗапрос as $сЗапрос)
+	$сПередача		=fread($_рПередача, 512);
+	if(!empty($сПередача))
 		{
-		$мЗапрос[]	=explode(":" , $сЗапрос);
+		$мПередача		=explode("\n", $сПередача);
 		}
-	return $мЗапрос;
+	else
+		{
+		_Report('fread($_рПередача, 512) empty.');
+		}
+	return $мПередача;
 	}
 function мЗаголовкиЗапроса($_мЗаголовки)
 	{
-	$мЗаголовки	=explode(" ", $_мЗаголовки[0]);
+	if(isset($_мЗаголовки[0]))
+		{
+		$мЗаголовки	=explode(" ", $_мЗаголовки[0]);
+		}
 	return $мЗаголовки;
 	}
+function мЗаголовкиВПеременные($_мЗапрос)
+	{
+	if(is_array($_мЗапрос))
+		{
+		foreach($_мЗапрос as $сЗапрос)
+			{
+			$мЗапрос[]	=explode(":" , $сЗапрос);
+			}
+		}
+	return $мЗапрос;
+	}
+
 function фЛоготипИконка()
 	{
 	$faviconBin			=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
-	fwrite($connect, "HTTP/1.1 200 OK\r\nContent-Type: image/png\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
+	fwrite($connect, "HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
 	unset($faviconBin);
 	}
-function фПостроитьПакетДанных()
+function фПостроитьПакетДанных($objKIIM, $bIzDynamic, $strTemplate)
 	{
 	$strContentType		='Content-Type: text/html';
 	$objEDRO		=new Event($objKIIM);
-	require_once		$objEDRO->arrDesign['strTemplate'];
+	require_once		$strTemplate;
 	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
-	if($objEDRO->arrEvent['bIzDynamic'])
+	if($bIzDynamic)
 		{
 		}
 	else
@@ -73,14 +86,17 @@ function фПостроитьПакетДанных()
 	fclose($connect);
 	unset($strBuffer);
 	}
-	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 $рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
 
 //$strBufferServerNotice		='<h1>Сервер Абхазия.LaDa,RDo</h1><AbhasiaServeWarning style="display:block;overflow:hidden;font-size:x-large;height:20px;line-height:19px;color:red;">Development version. For stable, visit <a href="http://HiFiIntelligentClub.COM">HiFiIntelligentClub.COM</a></AbhasiaServeWarning>';
-while ($рПриём = stream_socket_accept($рПриёмник, -1))
+while ($рПередача = stream_socket_accept($рПриёмник, -1))
 	{$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_accept','_strVectorPoint'=>'',));
 
-	$мЗаголовкиСлушателя	=мЗапросИзБраузераСлушателя($рПриём);
+	$мЗаголовкиСлушателя	=мЧтениеЗапросаИзБраузераСлушателя($рПередача);
 
 	if(isset($мЗаголовкиСлушателя[0]))
 		{
@@ -88,7 +104,7 @@ while ($рПриём = stream_socket_accept($рПриёмник, -1))
 
 		if(isset($мЗаголовки[1])&&$мЗаголовки[1]!="/favicon.ico")
 			{
-			фПостроитьПакетДанных();
+			фПостроитьПакетДанных($objKIIM ,$objEDRO->arrEvent['bIzDynamic'], $objEDRO->arrDesign['strTemplate']);
 			}
 		elseif(isset($arrRequest[1])&&$arrRequest[1]=="/favicon.ico")
 			{
