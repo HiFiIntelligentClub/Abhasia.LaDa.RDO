@@ -5,7 +5,7 @@ $_SERVER['REQUEST_URI']		='/';
 $_SERVER['SERVER_NAME']		='HiFiIntelligentClub.Ru';
 $_SERVER['HTTP_USER_AGENT']	='Abhasia LaDa.RDo';
 require_once('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
-require_once('/home/EDRO.SetOfTools/System/0.Functions/1.RequestsFilter.php');
+//require_once('/home/EDRO.SetOfTools/System/0.Functions/1.RequestsFilter.php'); -> Важная трансформация.
 require_once('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
 require_once('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
 require_once('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
