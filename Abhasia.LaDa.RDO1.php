@@ -5,7 +5,7 @@ $_SERVER['REQUEST_URI']		='/';
 $_SERVER['SERVER_NAME']		='HiFiIntelligentClub.Ru';
 $_SERVER['HTTP_USER_AGENT']	='Abhasia LaDa.RDo';
 require_once('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
-//require_once('/home/EDRO.SetOfTools/System/0.Functions/1.RequestsFilter.php'); -> Важная трансформация.
+require_once('/home/EDRO.SetOfTools/System/0.Functions/1.RequestsFilter.php');
 require_once('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
 require_once('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
 require_once('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
@@ -27,7 +27,7 @@ function мЗапросИзБраузераСлушателя($_lnConnect)
 	$arrHeaders		=explode("\n", $strConnect);
 	return $arrHeaders;
 	}
-function arrGetHeaders($_мЗапрос)
+function мЗаголовкиВПеременные($_мЗапрос)
 	{
 	$_мЗапрос	=array();
 	foreach($_мЗапрос as $сЗапрос)
@@ -41,7 +41,39 @@ function мЗаголовкиЗапроса($_мЗаголовки)
 	$мЗаголовки	=explode(" ", $_мЗаголовки[0]);
 	return $мЗаголовки;
 	}
+function фЛоготипИконка()
+	{
+	$faviconBin			=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
+	fwrite($connect, "HTTP/1.1 200 OK\r\nContent-Type: image/png\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
+	unset($faviconBin);
+	}
+function фПостроитьПакетДанных()
+	{
+	$strContentType		='Content-Type: text/html';
+	$objEDRO		=new Event($objKIIM);
+	require_once		$objEDRO->arrDesign['strTemplate'];
+	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
+	if($objEDRO->arrEvent['bIzDynamic'])
+		{
+		}
+	else
+		{
+		$strBuffer		.='</body>';
+		$strBuffer		.='</html>';
+		}
+	$strBufferLen		=strlen($strBuffer);
+	$strBuffer		= "HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".$strBufferLen."\r\nConnection: close\r\n\r\n".$strBuffer;
+	unset($arrOut);
+	unset($strOut);
 
+	file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $strBuffer);
+
+	KIIM::objFinish($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_accept','_strVectorPoint'=>'',));
+	fwrite($connect,$strBuffer);
+	fclose($connect);
+	unset($strBuffer);
+	}
+	
 $рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
 
 //$strBufferServerNotice		='<h1>Сервер Абхазия.LaDa,RDo</h1><AbhasiaServeWarning style="display:block;overflow:hidden;font-size:x-large;height:20px;line-height:19px;color:red;">Development version. For stable, visit <a href="http://HiFiIntelligentClub.COM">HiFiIntelligentClub.COM</a></AbhasiaServeWarning>';
@@ -52,39 +84,15 @@ while ($рПриём = stream_socket_accept($рПриёмник, -1))
 
 	if(isset($мЗаголовкиСлушателя[0]))
 		{
-		$arrRequest		=explode(" ", $arrHeaders[0]);
+		$мЗаголовки		=мЗаголовкиЗапроса($_мЗаголовки);
 
-		if(isset($arrRequest[1])&&$arrRequest[1]!="/favicon.ico")
+		if(isset($мЗаголовки[1])&&$мЗаголовки[1]!="/favicon.ico")
 			{
-			$strContentType		='Content-Type: text/html';
-			$objEDRO		=new Event($objKIIM);
-			require_once		$objEDRO->arrDesign['strTemplate'];
-			$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
-			if($objEDRO->arrEvent['bIzDynamic'])
-				{
-				}
-			else
-				{
-				$strBuffer		.='</body>';
-				$strBuffer		.='</html>';
-				}
-			$strBufferLen		=strlen($strBuffer);
-			$strBuffer		= "HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".$strBufferLen."\r\nConnection: close\r\n\r\n".$strBuffer;
-			unset($arrOut);
-			unset($strOut);
-
-			file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $strBuffer);
-
-			KIIM::objFinish($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_accept','_strVectorPoint'=>'',));
-			fwrite($connect,$strBuffer);
-			fclose($connect);
-			unset($strBuffer);
+			фПостроитьПакетДанных();
 			}
 		elseif(isset($arrRequest[1])&&$arrRequest[1]=="/favicon.ico")
 			{
-			$faviconBin			=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
-			fwrite($connect, "HTTP/1.1 200 OK\r\nContent-Type: image/png\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
-			unset($faviconBin);
+			фЛоготипИконка();
 			}
 		else
 			{
