@@ -41,19 +41,20 @@ function мЗаголовкиВПеременные($_мЗапрос)
 		}
 	return $мЗапрос;
 	}
-
-function фЛоготипИконка($_рПередача)
+function сПостроитьПакетДанныхЛоготипИконка()
 	{
-	$faviconBin			=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
-	fwrite($_рПередача, "HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin);
-	unset($faviconBin);
+	$faviconBin		=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
+	$спИконка 		="HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin;
+	return $спИконка;
 	}
-function фПостроитьПакетДанных($objKIIM, $_рПередача)
+function сПостроитьПакетДанных()
 	{
 	$strContentType		='Content-Type: text/html';
-	$objEDRO		=new Event($objKIIM);
-	require_once		$objEDRO->arrDesign['strTemplate'];
+	$objEDRO		=new Event(array());
+	//require_once		$objEDRO->arrDesign['strTemplate'];
+	$str			='123';
 	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
+	unset($str);
 	if($objEDRO->arrEvent['bIzDynamic'])
 		{
 		}
@@ -63,15 +64,7 @@ function фПостроитьПакетДанных($objKIIM, $_рПередач
 		$strBuffer		.='</html>';
 		}
 	$strBufferLen		=strlen($strBuffer);
-	$strBuffer		= "HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length:".$strBufferLen."\r\nConnection: close\r\n\r\n".$strBuffer;
-	unset($arrOut);
-	unset($strOut);
-
-	file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $strBuffer);
-
-	KIIM::objFinish($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_accept','_strVectorPoint'=>'',));
-	fwrite($_рПередача, $strBuffer);
-	fclose($_рПередача);
-	unset($strBuffer);
+	$strBuffer		="HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".$strBufferLen."\r\nConnection: close\r\n\r\n".$strBuffer;
+	return $strBuffer;
 	}
 ?>
