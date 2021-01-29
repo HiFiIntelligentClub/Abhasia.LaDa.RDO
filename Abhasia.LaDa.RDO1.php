@@ -21,9 +21,11 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 	//$_SERVER['REQUEST_URI']		='/';
 	$мЗаголовкиСлушателя		=мЧтениеЗапросаИзБраузераСлушателя($рПередача);
 	$мЗаголовкиСлушателяПеременные	=мЗаголовкиВПеременные($мЗаголовкиСлушателя);
-	print_r($мЗаголовкиСлушателяПеременные);
+	//print_r($мЗаголовкиСлушателяПеременные);
 	$_SERVER['HTTP_USER_AGENT']	=$мЗаголовкиСлушателяПеременные['User-Agent'];
 	$_SERVER['SERVER_NAME']		=$мЗаголовкиСлушателяПеременные['Host'];
+	$_SERVER['Accept-Language']	=$мЗаголовкиСлушателяПеременные['Accept-Language'];
+	$_SERVER['Accept-Encoding']	=$мЗаголовкиСлушателяПеременные['Accept-Encoding'];
 	if(isset($мЗаголовкиСлушателяПеременные['Cookie'])&&strpos($мЗаголовкиСлушателяПеременные['Cookie'],'strListener=')!==FALSE)
 		{
 		$_SERVER['strListener']		=str_replace('strListener=', '', trim($мЗаголовкиСлушателяПеременные['Cookie']));
@@ -32,6 +34,10 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 		{
 		$_SERVER['strListener']		='';
 		}
+		//socket_getpeername($рПриёмник, $strI, $intI);
+		//echo  $strI;
+		//echo $intI;
+		//echo "\n";
 	if(isset($мЗаголовкиСлушателя[0]))
 		{
 		$мЗаголовки			=мЗаголовкиЗапроса($мЗаголовкиСлушателя);
@@ -42,7 +48,7 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 			)
 			{
 			$_SERVER['REQUEST_URI']		=$мЗаголовки[1];
-
+			$_SERVER['REMOTE_ADDR']		='Disabled on HIC';
 			$спДляОтправкиСлушателю		=сПостроитьПакетДанных();
 			fwrite($рПередача, $спДляОтправкиСлушателю);
 			fclose($рПередача);
