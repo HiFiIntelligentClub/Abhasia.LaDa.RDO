@@ -48,7 +48,7 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 			)
 			{
 			$_SERVER['REQUEST_URI']		=$мЗаголовки[1];
-			$_SERVER['REMOTE_ADDR']		='Disabled on HIC';
+			$_SERVER['REMOTE_ADDR']		='<ifEN>Temporary disabled on HIC</ifEN><ifRU>Временно отключено</ifRU>';
 			$спДляОтправкиСлушателю		=сПостроитьПакетДанных();
 			fwrite($рПередача, $спДляОтправкиСлушателю);
 			fclose($рПередача);
