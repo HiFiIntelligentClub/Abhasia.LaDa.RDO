@@ -38,7 +38,18 @@ function мЗаголовкиВПеременные($_мЗапрос)
 		{
 		foreach($_мЗапрос as $сЗапрос)
 			{
-			$мЗапрос[]	=explode(":" , $сЗапрос);
+			$мТекущаяСтрока	=explode(":" , $сЗапрос);
+			if(isset($мТекущаяСтрока[0])&&isset($мТекущаяСтрока[1]))
+				{
+				$мЗапрос[$мТекущаяСтрока[0]]	=$мТекущаяСтрока[1];
+				}
+			elseif(isset($мТекущаяСтрока[0])&&!isset($мТекущаяСтрока[1]))
+				{
+				$мЗапрос['strRequest']		=$мТекущаяСтрока[0];
+				}
+			else
+				{
+				}
 			}
 		}
 	return $мЗапрос;
@@ -60,12 +71,6 @@ function сПостроитьПакетДанных()
 	$strContentType		='Content-Type: text/html';
 	$objEDRO		=new Event(array());
 	require			$objEDRO->arrDesign['strTemplate'];
-	//$str			='123';
-	//$str			=сКодировать('123123123123', 'к'); //E or  /d'123';
-
-	//$str			.=$objEDRO::strObjectDeclare();
-	//$str			.=$objEDRO::strObjectInit();
-	//$str			.='<script>objEvent._GoToUrl("?str=2&z=1")</script>';
 	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
 	unset($str);
 	if($objEDRO->arrEvent['bIzDynamic'])
