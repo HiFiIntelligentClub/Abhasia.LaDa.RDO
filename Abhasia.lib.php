@@ -1,11 +1,12 @@
 <?php
+
 function рОрганизацияПриёмникаЗапросовСлушателя()
 	{
 	$objKIIM=KIIM::objStart(false , array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'	=>'stream_socket_server','_strVectorPoint'=>'',));
 
 	//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://hifiintelligentclub.ru:80", $errno, $errstr);
 	//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://127.0.0.1:8080", $errno, $errstr);
-	$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://192.168.1.198:80", $errno, $errstr);
+	$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://".strDomain().":80", $errno, $errstr);
 
 	KIIM::objFinish($objKIIM, array('_strClass'=>'Socket','_strMethod'=>'Start','_strMessage'=>'stream_socket_server','_strVectorPoint'=>'',));
 	return $рПриёмникЗапросовСлушателя;
@@ -69,7 +70,13 @@ function сПостроитьПакетДанныхРоботТхт()
 function сПостроитьПакетДанных()
 	{
 	$strContentType		='Content-Type: text/html';
+	$strNextDate		=date(DATE_RFC822, mktime(0, 0, 0, date("m")  , date("d"), date("Y")+1));
+	// "set-cookie: username=aaa13; expires=friday,31-dec-99 23:59:59 gmt; path=/win/internet/html/; domain=citforum.ru;nn";
+
 	$objEDRO		=new Event(array());
+
+	$strCookie		='set-cookie: strListener='.$objEDRO->arrReality['strListenerId'].'; expires='.$strNextDate.'; path=/; domain='.strDomain().';';
+
 	require			$objEDRO->arrDesign['strTemplate'];
 	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
 	unset($str);
@@ -81,7 +88,7 @@ function сПостроитьПакетДанных()
 		$strBuffer		.='</body>';
 		$strBuffer		.='</html>';
 		}
-	$strBuffer		="HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\nConnection: close\r\n\r\n".$strBuffer;
+	$strBuffer		="HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
 	return $strBuffer;
 	}
 ?>
