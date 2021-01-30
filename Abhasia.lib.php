@@ -57,15 +57,15 @@ function мЗаголовкиВПеременные($_мЗапрос)
 	}
 function сПостроитьПакетДанныхЛоготипИконка()
 	{
-	$faviconBin		=readfile('/home/HiFiIntelligentClub.Ru/favicon.png');
+	$faviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
 	$спИконка 		="HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin;
 	return $спИконка;
 	}
 function сПостроитьПакетДанныхРоботТхт()
 	{
-	$robotsTxt		=readfile('/home/HiFiIntelligentClub.Ru/robots.txt');
-	$robotsTxt 		="HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($robotsTxt)."\r\nConnection: close\r\n\r\n".$robotsTxt;
-	return $robotsTxt;
+	$robotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
+	$robotsHead 		="HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($robotsTxt)."\r\nConnection: close\r\n\r\n".$robotsTxt;
+	return $robotsHead;
 	}
 function сПостроитьПакетДанных()
 	{
@@ -78,7 +78,7 @@ function сПостроитьПакетДанных()
 	$strCookie		='set-cookie: strListener='.$objEDRO->arrReality['strListenerId'].'; expires='.$strNextDate.'; path=/; domain='.strDomain().';';
 
 	require			$objEDRO->arrDesign['strTemplate'];
-	$strBuffer		=str_replace(array("\r\n\r\n", "\n\n"), "", $str);
+	$strBuffer		=str_replace("\r\n\r\n", "", $str);
 	unset($str);
 	if($objEDRO->arrEvent['bIzDynamic'])
 		{
