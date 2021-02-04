@@ -53,6 +53,22 @@ function мЗаголовкиВПеременные($_мЗапрос)
 				}
 			}
 		}
+	if(!isset($мЗапрос['User-Agent']))
+		{
+		$мЗапрос['User-Agent']		='BOT';
+		}
+	if(!isset($мЗапрос['Host']))
+		{
+		$мЗапрос['Host']		='BOT';
+		}
+	if(!isset($мЗапрос['Accept-Language']))
+		{
+		$мЗапрос['Accept-Language']	='BOT';
+		}
+	if(!isset($мЗапрос['Accept-Encoding']))
+		{
+		$мЗапрос['Accept-Encoding']	='BOT';
+		}
 	return $мЗапрос;
 	}
 function сПостроитьПакетДанныхЛоготипИконка()
