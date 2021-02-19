@@ -2,15 +2,14 @@
 <?php
 // © A.A.CheckMaRev assminog@gmail.com tubmulur@yandex.ru first sucsessfull run at Birthday of Gersan Gioev 26.11.2020
 //р=Ресурс	сп=СтрокаПакет(Пакет для вебсервера)
-require_once('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
-// require_once('/home/EDRO.SetOfTools/System/0.Functions/1.RequestsFilter.php'); -Transform
-require_once('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
-require_once('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
-require_once('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
-require_once('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
-//require_once('/home/EDRO.SetOfTools/System/5.Templates/0.strKIIM.Template.php');
-require_once('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
-require_once('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
+set_time_limit(0);
+require('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
+require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
+require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
+require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
+require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
+require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
+require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
 
 
 $рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();

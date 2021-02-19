@@ -93,6 +93,8 @@ function сПостроитьПакетДанных()
 
 	$strCookie		='set-cookie: strListener='.$objEDRO->arrReality['strListenerId'].'; expires='.$strNextDate.'; path=/; domain='.strDomain().';';
 
+	echo $objEDRO->arrDesign['strTemplate']."\n"; 
+	
 	require			$objEDRO->arrDesign['strTemplate'];
 	$strBuffer		=str_replace("\r\n\r\n", "", $str);
 	unset($str);
