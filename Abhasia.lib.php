@@ -73,7 +73,7 @@ function мЗаголовкиВПеременные($_мЗапрос)
 	}
 function сПостроитьПакетДанныхЛоготипКартинка($strJPG)
 	{
-	//$strJPG			=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
+	//$strJPG		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
 	return 			"HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strJPG)."\r\nConnection: close\r\n\r\n".$strJPG;
 	}
 function сПостроитьПакетДанныхЛоготипИконка($faviconBin)

@@ -12,6 +12,7 @@ require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
 /*Буфферинг */
+$faviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
 $strJPG			=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
 $robotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
 /*Буфферинг */
@@ -48,10 +49,15 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 			&&$мЗаголовки[1]!="/favicon.ico"
 			&&$мЗаголовки[1]!="/robots.txt"
 			&&($сРасширение=="jpg")
-			)
+				)
 			{
-			fwrite($рПередача, сПостроитьПакетДанныхЛоготипКартинка($strJPG));
-			fclose($рПередача);
+	/* J 	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+
+	/* P	*/	$сЛогоКартинка			=сПостроитьПакетДанныхЛоготипКартинка($strJPG);
+			fwrite($рПередача, $сЛогоКартинка, strlen($сЛогоКартинка));
+	/* G	*/	fclose($рПередача);
+
+			file_put_contents('x.txt', $_SERVER['strListener'].'	After push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 			unset($спДляОтправкиСлушателю);	
 			}
 		elseif(
@@ -59,45 +65,57 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 			&&$мЗаголовки[1]!="/favicon.ico"
 			&&$мЗаголовки[1]!="/robots.txt"
 			&&($сРасширение!="jpg")
-			)
+				)
 			{
-			file_put_contents('x.txt', $_SERVER['strListener'].'	Before push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+	/* H	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+
 			$_SERVER['REQUEST_URI']		=$мЗаголовки[1];
 			$_SERVER['REMOTE_ADDR']		='<ifEN>Temporary disabled</ifEN><ifRU>Временно отключено</ifRU>';
-			$спДляОтправкиСлушателю		=сПостроитьПакетДанных();
-			fwrite($рПередача, $спДляОтправкиСлушателю);
-			fclose($рПередача);
-			file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $спДляОтправкиСлушателю);
-			unset($спДляОтправкиСлушателю);
+	/* T	*/	$спДляОтправкиСлушателю				=сПостроитьПакетДанных();
+			//fwrite($рПередача, $спДляОтправкиСлушателю);
+	/* M	*/		
+			//file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $спДляОтправкиСлушателю);
+			fwrite($рПередача, $спДляОтправкиСлушателю, strlen($спДляОтправкиСлушателю));
+	/* L	*/	fclose($рПередача);
+
 			file_put_contents('x.txt', $_SERVER['strListener'].'	After push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+			unset($спДляОтправкиСлушателю);
 			}
 		elseif(
 			isset($мЗаголовки[1])
-			&&$мЗаголовки[1]=="/favicon.ico"
+	/* Ф	*/	&&$мЗаголовки[1]=="/favicon.ico"
 			&&$мЗаголовки[1]!="/robots.txt"
-			&&($сРасширение!="jpg")
-			)
+	/* А 	*/	&&($сРасширение!="jpg")
+				)
 			{
-			file_put_contents('x.txt', '	Before push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-			fwrite($рПередача, сПостроитьПакетДанныхЛоготипИконка(), strlen(сПостроитьПакетДанныхЛоготипИконка()));
-			fclose($рПередача);
-			file_put_contents('x.txt', '	After push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+	/* В	*/	file_put_contents('x.txt', '	Before push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+
+	/* И	*/	$strICO						=сПостроитьПакетДанныхЛоготипИконка($faviconBin);
+			fwrite($рПередача, $strICO, strlen($strICO));
+	/* К	*/	fclose($рПередача);
+
+	/* О	*/	file_put_contents('x.txt', '	After push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+			unset($strICO);
 			}
 		elseif(
 			isset($мЗаголовки[1])
-			&&$мЗаголовки[1]!="/favicon.ico"
+	/* Р	*/	&&$мЗаголовки[1]!="/favicon.ico"
 			&&$мЗаголовки[1]=="/robots.txt"
 			&&($сРасширение!="jpg")
-			)
+	/* О 	*/		)
 			{
-			file_put_contents('x.txt', $_SERVER['strListener'].'	Before push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-			fwrite($рПередача, сПостроитьПакетДанныхРоботТхт(), strlen(сПостроитьПакетДанныхРоботТхт()));
+	/* Б	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+
+			$сРоботы					=сПостроитьПакетДанныхРоботТхт($robotsTxt);
+	/* О	*/	fwrite($рПередача, $сРоботы, strlen($сРоботы));
 			fclose($рПередача);
+	/* Т	*/	
 			file_put_contents('x.txt', $_SERVER['strListener'].'	After push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+	/* Ы	*/	unset($сРоботы);
 			}
 		else
 			{
-			
+			_Report(date("Y-m-d H:i:s").' Абхазия MAIN ELSE');
 			}
 		}
 	}
