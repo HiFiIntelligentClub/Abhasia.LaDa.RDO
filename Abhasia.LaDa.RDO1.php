@@ -51,13 +51,13 @@ while ($рПередача = stream_socket_accept($рПриёмник, -1))
 			&&($сРасширение=="jpg")
 				)
 			{
-	/* J 	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+	/* J 	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before image     :				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 
 	/* P	*/	$сЛогоКартинка			=сПостроитьПакетДанныхЛоготипКартинка($strJPG);
 			fwrite($рПередача, $сЛогоКартинка, strlen($сЛогоКартинка));
 	/* G	*/	fclose($рПередача);
 
-			file_put_contents('x.txt', $_SERVER['strListener'].'	After push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+			file_put_contents('x.txt', $_SERVER['strListener'].'	After image    :				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 			unset($спДляОтправкиСлушателю);	
 			}
 		elseif(
