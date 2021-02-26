@@ -71,17 +71,20 @@ function мЗаголовкиВПеременные($_мЗапрос)
 		}
 	return $мЗапрос;
 	}
-function сПостроитьПакетДанныхЛоготипИконка()
+function сПостроитьПакетДанныхЛоготипКартинка($strJPG)
 	{
-	$faviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
-	$спИконка 		="HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin;
-	return $спИконка;
+	//$strJPG			=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
+	return 			"HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strJPG)."\r\nConnection: close\r\n\r\n".$strJPG;
 	}
-function сПостроитьПакетДанныхРоботТхт()
+function сПостроитьПакетДанныхЛоготипИконка($faviconBin)
 	{
-	$robotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
-	$robotsHead 		="HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($robotsTxt)."\r\nConnection: close\r\n\r\n".$robotsTxt;
-	return $robotsHead;
+	//$faviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
+	return			"HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin;
+	}
+function сПостроитьПакетДанныхРоботТхт($robotsTxt)
+	{
+	//$robotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
+	 return			"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($robotsTxt)."\r\nConnection: close\r\n\r\n".$robotsTxt;
 	}
 function сПостроитьПакетДанных()
 	{
@@ -106,7 +109,6 @@ function сПостроитьПакетДанных()
 		$strBuffer		.='</body>';
 		$strBuffer		.='</html>';
 		}
-	$strBuffer		="HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
-	return $strBuffer;
+	return 	    		"HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
 	}
 ?>
