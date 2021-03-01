@@ -17,10 +17,8 @@
 //																	
 //																	
 set_time_limit(0);
-
-
-
 Абхазия::VoId();
+
 class Абхазия
 	{
 	private $рПриёмник;
@@ -30,9 +28,11 @@ class Абхазия
 	private $мБуффер	=array();
 	public function __construct()
 		{
-		//:Buffering load
-		//:Init Абхазия responser
-		//:Construct EDRO
+		//1.Load library
+		//2.Buffering load
+		//3.Create OS socket
+		//4.Make socket accessible and "Beat the foam"
+		//4.1.
 		//....
 					$this->сСтартЖурнала();
 		$this->мБуффер		=мБуфферизация($objKIIM);
@@ -53,7 +53,7 @@ class Абхазия
 			if(
 				isset($this->мЗаголовки[1])
 				&&$this->мЗаголовки[1]!="/favicon.ico"
-7				&&$this->мЗаголовки[1]!="/robots.txt"
+				&&$this->мЗаголовки[1]!="/robots.txt"
 				&&($this->сРасширение=="jpg")
 					)
 		/* J 	*/	{/*DEBUG*/file_put_contents('x.txt', $_SERVER['strListener'].'	Before image     :				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
@@ -128,6 +128,7 @@ class Абхазия
 		require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 		require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 		require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
+
 		$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
 		$м	=array();
 		$м['strFaviconBin']		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
