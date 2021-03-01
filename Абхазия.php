@@ -17,19 +17,8 @@
 //																	
 //																	
 set_time_limit(0);
-$сТекущееВремяСтемпСтарт	=сТекущееВремяСтемп();
-$сРасположениеСчётчикВход	='/home/EDRO.o2o/Countup/Вход.plmr';
-$сРасположениеСчётчикВходИстор	='/home/EDRO.o2o/Countup/History/Вход.plmr';
-$ч0СчётчикВход			=file_get_contents($сРасположениеСчётчикВход);
-				 file_put_contents($сРасположениеСчётчикВход, ($ч0СчётчикВход+1));
-				 /*DEBUG*/file_put_contents($сРасположениеСчётчикВходИстор,"\n=====\n".'	Start:		'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-require('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
-require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
-require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
-require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
-require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
-require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
-require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
+
+
 
 Абхазия::VoId($objEDRO);
 class Абхазия
@@ -45,11 +34,16 @@ class Абхазия
 		//:Init Абхазия responser
 		//:Construct EDRO
 		//....
+					$this->сСтартЖурнала();
+		$this->мБуффер		=мБуфферизация($objKIIM);
 		$this->рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
+
 		while($this->рПередача = stream_socket_accept($this->рПриёмник, -1))
 			{/*DEBUG*/file_put_contents('x.txt', '	StartLIVE:			'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 
 			$this->objEDRO	=new Event($objKIIM);
+
+			$this->
 
 			if(isset($this->мЗаголовкиСлушателя[0]))
 				{/*DEBUG*/file_put_contents('x.txt', "\n".$_SERVER['strListener'].'	AfterReadListener:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
@@ -59,7 +53,7 @@ class Абхазия
 			if(
 				isset($this->мЗаголовки[1])
 				&&$this->мЗаголовки[1]!="/favicon.ico"
-				&&$this->мЗаголовки[1]!="/robots.txt"
+7				&&$this->мЗаголовки[1]!="/robots.txt"
 				&&($this->сРасширение=="jpg")
 					)
 		/* J 	*/	{/*DEBUG*/file_put_contents('x.txt', $_SERVER['strListener'].'	Before image     :				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
@@ -127,6 +121,13 @@ class Абхазия
 		}
 	private function мБуфферизация($objKIIM)
 		{
+		require('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
+		require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
+		require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
+		require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
+		require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
+		require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
+		require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
 		$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
 		$м	=array();
 		$м['strFaviconBin']		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
@@ -239,9 +240,19 @@ class Абхазия
 		KIIM::objFinish($objKIIM, array('_strClass'=> __CLASS__, '_strMethod'=>__FUNCTION__, '_strMessage'=>'','_strVectorPoint'=>''));
 		return"HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
 		}
+	public static function сСтартЖурнала()
+		{
+		$сТекущееВремяСтемпСтарт	=сТекущееВремяСтемп();
+		$сРасположениеСчётчикВход	='/home/EDRO.o2o/Countup/Вход.plmr';
+		$сРасположениеСчётчикВходИстор	='/home/EDRO.o2o/Countup/History/Вход.plmr';
+		$ч0СчётчикВход			=file_get_contents($сРасположениеСчётчикВход);
+				 file_put_contents($сРасположениеСчётчикВход, ($ч0СчётчикВход+1));
+				 /*DEBUG*/file_put_contents($сРасположениеСчётчикВходИстор,"\n=====\n".'	Start:		'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+		}
 	public static function VoId($objKIIM)
 		{
 		$оАбхазия= new Абхазия($objKIIM);
 		}
 	}
+
 ?>
