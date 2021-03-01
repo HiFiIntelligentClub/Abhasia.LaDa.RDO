@@ -20,7 +20,7 @@ set_time_limit(0);
 
 
 
-Абхазия::VoId($objEDRO);
+Абхазия::VoId();
 class Абхазия
 	{
 	private $рПриёмник;
@@ -28,7 +28,7 @@ class Абхазия
 	private $мЗаголовки;
 	private $рПередача;
 	private $мБуффер	=array();
-	public function __construct($objKIIM)
+	public function __construct()
 		{
 		//:Buffering load
 		//:Init Абхазия responser
