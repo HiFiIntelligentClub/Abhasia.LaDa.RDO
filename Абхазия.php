@@ -34,64 +34,27 @@ require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
 class Абхазия
 	{
 	private $рПриёмник;
-	public function __construct()
+	private $objEDRO;
+	private $мЗаголовки;
+	private $рПередача;
+	public function __construct($objKIIM)
 		{
 		//:Buffering load
 		//:Init Абхазия responser
 		//:Construct EDRO
 		//....
-		//$рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		file_put_contents('x.txt', '	FinishLoad:		'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-
-		while ($рПередача = stream_socket_accept($рПриёмник, -1))
+		$this->рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
+		while($this->рПередача = stream_socket_accept($this->рПриёмник, -1))
 			{file_put_contents('x.txt', '	StartLIVE:			'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-	
-			$objEDRO	=new Event($objKIIM);
 
-			if(isset($мЗаголовкиСлушателя[0]))
+			$this->objEDRO	=new Event($objKIIM);
+
+			if(isset($this->мЗаголовкиСлушателя[0]))
 				{file_put_contents('x.txt', "\n".$_SERVER['strListener'].'	AfterReadListener:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 
-				$мЗаголовки			=мЗаголовкиЗапроса($мЗаголовкиСлушателя);
-				$сРасширение			=mb_strtolower(сКонцДоСимвола($мЗаголовки[1], '.'));
-	    		if(
+				$this->мЗаголовки		=мЗаголовкиЗапроса($мЗаголовкиСлушателя);
+				$this->сРасширение		=mb_strtolower(сКонцДоСимвола($this->мЗаголовки[1], '.'));
+			if(
 				isset($мЗаголовки[1])
 				&&$мЗаголовки[1]!="/favicon.ico"
 				&&$мЗаголовки[1]!="/robots.txt"
