@@ -128,17 +128,17 @@ class Абхазия
 				}
 			}
 		}
-	private function _Буфферизация($objKIIM)
+	private function мБуфферизация($objKIIM)
 		{
 		$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
-		$this->strFaviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
-		$this->strJPGLogo		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
-		$this->strRobotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
+		$м	=array();
+		$м['strFaviconBin']		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
+		$м['strJPGLogo']		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
+		$м['strRobotsTxt']		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
 		KIIM::objFinish($objKIIM, array('_strClass'=> __CLASS__, '_strMethod'=>__FUNCTION__, '_strMessage'=>'','_strVectorPoint'=>''));
+		return $м;
 		}
-	/*private function _
-		{
-		}*/
+
 	private function рОрганизацияПриёмникаЗапросовСлушателя($objKIIM)
 		{
 		$objKIIM=KIIM::objStart(false , array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'	=>'','_strVectorPoint'=>''));
