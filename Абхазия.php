@@ -38,9 +38,7 @@ class Абхазия
 	private $objEDRO;
 	private $мЗаголовки;
 	private $рПередача;
-	private $strFaviconBin;
-	private $strJPGLogo;
-	private $strRobotsTxt
+	private $мБуффер	=array();
 	public function __construct($objKIIM)
 		{
 		//:Buffering load
