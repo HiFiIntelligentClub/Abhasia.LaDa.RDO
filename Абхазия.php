@@ -31,12 +31,16 @@ require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
 
+Абхазия::
 class Абхазия
 	{
 	private $рПриёмник;
 	private $objEDRO;
 	private $мЗаголовки;
 	private $рПередача;
+	private $strFaviconBin;
+	private $strJPGLogo;
+	private $strRobotsTxt
 	public function __construct($objKIIM)
 		{
 		//:Buffering load
@@ -56,19 +60,19 @@ class Абхазия
 				$this->сРасширение		=mb_strtolower(сКонцДоСимвола($this->мЗаголовки[1], '.'));
 			if(
 				isset($мЗаголовки[1])
-				&&$мЗаголовки[1]!="/favicon.ico"
-				&&$мЗаголовки[1]!="/robots.txt"
-				&&($сРасширение=="jpg")
+				&&$this->мЗаголовки[1]!="/favicon.ico"
+				&&$this->мЗаголовки[1]!="/robots.txt"
+				&&($this->сРасширение=="jpg")
 					)
 		/* J 	*/	{file_put_contents('x.txt', $_SERVER['strListener'].'	Before image     :				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 		/* P	*/	
-		/* G	*/	_ЗагрузитьОтветСлушателю($objKIIM, $strJPGLogo);
+		/* G	*/	_ЗагрузитьОтветСлушателю($this->objKIIM, $strJPGLogo);
 				}
 			elseif(
-				isset($мЗаголовки[1])
-				&&$мЗаголовки[1]!="/favicon.ico"
-				&&$мЗаголовки[1]!="/robots.txt"
-				&&($сРасширение!="jpg")
+				isset($this->мЗаголовки[1])
+				&&$this->мЗаголовки[1]!="/favicon.ico"
+				&&$this->мЗаголовки[1]!="/robots.txt"
+				&&($this->сРасширение!="jpg")
     					)
 				{
 		/* H	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
@@ -87,33 +91,33 @@ class Абхазия
 				unset($спДляОтправкиСлушателю);
 				}
 			elseif(
-				isset($мЗаголовки[1])
-		/* Ф	*/	&&$мЗаголовки[1]=="/favicon.ico"
-        			&&$мЗаголовки[1]!="/robots.txt"
-		/* А 	*/	&&($сРасширение!="jpg")
+				isset($this->мЗаголовки[1])
+		/* Ф	*/	&&$this->мЗаголовки[1]=="/favicon.ico"
+        			&&$this->мЗаголовки[1]!="/robots.txt"
+		/* А 	*/	&&($this->сРасширение!="jpg")
 					)
 				{
 		/* В	*/	file_put_contents('x.txt', '	Before push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 
 		/* И	*/	$strICO						=сПостроитьПакетДанныхЛоготипИконка($faviconBin);
-				fwrite($рПередача, $strICO, strlen($strICO));
-		/* К	*/	fclose($рПередача);
+				fwrite($this->рПередача, $strICO, strlen($strICO));
+		/* К	*/	fclose($this->рПередача);
 
 		/* О	*/	file_put_contents('x.txt', '	After push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 				unset($strICO);
 				}
 			elseif(
-				isset($мЗаголовки[1])
-		/* Р	*/	&&$мЗаголовки[1]!="/favicon.ico"
-				&&$мЗаголовки[1]=="/robots.txt"
-				&&($сРасширение!="jpg")
+				isset($this->мЗаголовки[1])
+		/* Р	*/	&&$this->мЗаголовки[1]!="/favicon.ico"
+				&&$this->мЗаголовки[1]=="/robots.txt"
+				&&($this->сРасширение!="jpg")
 		/* О 	*/		)
 				{
 		/* Б	*/	file_put_contents('x.txt', $_SERVER['strListener'].'	Before push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 
 				$сРоботы					=сПостроитьПакетДанныхРоботТхт($robotsTxt);
-		/* О	*/	fwrite($рПередача, $сРоботы, strlen($сРоботы));
-				fclose($рПередача);
+		/* О	*/	fwrite($this->рПередача, $сРоботы, strlen($сРоботы));
+				fclose($this->рПередача);
 		/* Т	*/	
 				file_put_contents('x.txt', $_SERVER['strListener'].'	After push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 		/* Ы	*/	unset($сРоботы);
@@ -124,29 +128,31 @@ class Абхазия
 				}
 			}
 		}
-	private function _Буфферизация()
+	private function _Буфферизация($objKIIM)
 		{
 		$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
-		$faviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
-		$strJPGLogo		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
-		$robotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
+		$this->strFaviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
+		$this->strJPGLogo		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
+		$this->strRobotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
 		KIIM::objFinish($objKIIM, array('_strClass'=> __CLASS__, '_strMethod'=>__FUNCTION__, '_strMessage'=>'','_strVectorPoint'=>''));
 		}
-	private function _
+	/*private function _
 		{
-		}
-	private function _ОрганизацияПриёмникаЗапросовСлушателя()
+		}*/
+	private function рОрганизацияПриёмникаЗапросовСлушателя($objKIIM)
 		{
 		$objKIIM=KIIM::objStart(false , array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'	=>'','_strVectorPoint'=>''));
 
 		//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://hifiintelligentclub.ru:80", $errno, $errstr);
 		//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://127.0.0.1:8080", $errno, $errstr);
 		$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://".strDomain().":80", $errno, $errstr);
-
 		KIIM::objFinish($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
+
+		return $рПриёмникЗапросовСлушателя;
 		}
-	private function мЧтениеЗапросаИзБраузераСлушателя($_рПередача)
+	private function мЧтениеЗапросаИзБраузераСлушателя($objKIIM ,$_рПередача)
 		{
+		$objKIIM=KIIM::objStart(false , array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'	=>'','_strVectorPoint'=>''));
 		$сПередача		=fread($_рПередача, 512);
 		if(!empty($сПередача))
 			{
@@ -156,6 +162,7 @@ class Абхазия
 			{
 			_Report('fread($_рПередача, 512) empty.');
 			}
+		KIIM::objFinish($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
 		return $мПередача;
 		}
 	private function мЗаголовкиЗапроса($_мЗаголовки)
@@ -212,18 +219,19 @@ class Абхазия
 		//$strJPG		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
 		return 			"HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strJPG)."\r\nConnection: close\r\n\r\n".$strJPG;
 		}
-	private function сПостроитьПакетДанных($_objKIIM, $objEDRO)
+	private function сПостроитьПакетДанных($objKIIM, $objEDRO)
 		{
+		$objKIIM=KIIM::objStart($objKIIM, array('_strClass'=>__CLASS__,'_strMethod'=>__FUNCTION__,'_strMessage'=>'','_strVectorPoint'=>''));
 		$strContentType		='Content-Type: text/html';
 		$strNextDate		=date(DATE_RFC822, mktime(0, 0, 0, date("m")  , date("d"), date("Y")+1));
 		// "set-cookie: username=aaa13; expires=friday,31-dec-99 23:59:59 gmt; path=/win/internet/html/; domain=citforum.ru;nn";
 
-		echo $objEDRO->arrDesign['strTemplate']."\n"; 
+		$this->objEDRO->arrDesign['strTemplate']."\n"; 
 
-		require			$objEDRO->arrDesign['strTemplate'];
+		require			$this->objEDRO->arrDesign['strTemplate'];
 		$strBuffer		=str_replace("\r\n\r\n", "", $str);
 		unset($str);
-		if($objEDRO->arrEvent['bIzDynamic'])
+		if($this->objEDRO->arrEvent['bIzDynamic'])
 			{
 			}
 		else
@@ -231,24 +239,12 @@ class Абхазия
 			$strBuffer		.='</body>';
 			$strBuffer		.='</html>';
 			}
-		return 	    		"HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
+		KIIM::objFinish($objKIIM, array('_strClass'=> __CLASS__, '_strMethod'=>__FUNCTION__, '_strMessage'=>'','_strVectorPoint'=>''));
+		return"HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
+		}
+	public static function VoId($objKIIM)
+		{
+		$оАбхазия= new Абхазия($objKIIM);
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
