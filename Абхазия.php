@@ -122,25 +122,7 @@ class Абхазия
 				}
 			}
 		}
-	private function мБуфферизация()
-		{
-		$this->_КИМ('Start');
-		require('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
-		require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
-		require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
-		require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
-		require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
-		require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
-		require('/home/EDRO.SetOfTools/DjService/Abhasia.lib.php');
-		$this->_КИМ('End');
-		$this->_КИМ('Start');
-		$м	=array();
-		$м['strFaviconBin']		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
-		$м['strJPGLogo']		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
-		$м['strRobotsTxt']		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
-		$this->_КИМ('End');
-		return $м;
-		}
+
 
 	private function рОрганизацияПриёмникаЗапросовСлушателя()
 		{
@@ -251,6 +233,24 @@ class Абхазия
 						 file_put_contents($сРасположениеСчётчикВход, ($ч0СчётчикВход+1));
 						 /*DEBUG*/file_put_contents($сРасположениеСчётчикВходИстор,"\n=====\n".'	Start:		'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 		$this->_КИМ('End');
+		}
+	private function мБуфферизация()
+		{
+		$this->_КИМ('Start');
+		require('/home/EDRO.SetOfTools/System/0.Functions/0.strNDigit.php');
+		require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
+		require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
+		require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
+		require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
+		require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
+		$this->_КИМ('End');
+		$this->_КИМ('Start');
+		$м	=array();
+		$м['strFaviconBin']		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
+		$м['strJPGLogo']		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
+		$м['strRobotsTxt']		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
+		$this->_КИМ('End');
+		return $м;
 		}
 	public function _КИМ($strDirection='Start')
 		{
