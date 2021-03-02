@@ -48,7 +48,7 @@ class Абхазия
 			{
 
 			$this->objEDRO	=new Event();
-
+exit;
 			if(isset($this->мЗаголовкиСлушателя[0]))
 				{
 
