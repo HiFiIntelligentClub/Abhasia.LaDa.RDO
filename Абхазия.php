@@ -17,15 +17,7 @@
 //																	
 //																	
 set_time_limit(0);
-function _КИМ($_strDirection='Start')
-	{
-	$this->мКИМ[$this->ч0КИМШаг]['arrStart']['strTime'] 			=сТекущееВремяСтемп();
-	$this->мКИМ[$this->ч0КИМШаг]['arrStart']['strTimeDelta']		=сТекущееВремяСтемп();
-	$this->мКИМ[$this->ч0КИМШаг]['arrStart']['strTimeDeltaAll']		=сТекущееВремяСтемп();
-	$this->мКИМ[$this->ч0КИМШаг]['arrStart'][__CLASS__]			=сТекущееВремяСтемп();
-	$this->мКИМ[$this->ч0КИМШаг]['arrStart'][__FUNCTION__]			=сТекущееВремяСтемп();
-	$this->ч0КИМШаг++;
-	}
+
 Абхазия::VoId();
 
 class Абхазия
