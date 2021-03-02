@@ -241,7 +241,7 @@ class Абхазия
 		require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
 		require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
 		require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
-		require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
+		//require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 		require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 		$this->_КИМ('End');
 		$this->_КИМ('Start');
