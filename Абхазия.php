@@ -97,7 +97,7 @@ class Абхазия
 				&&($this->сРасширение!="jpg")
 		/* О 	*/		)
 				{
-		/* Б	*/	$сРоботы					=сПостроитьПакетДанныхРоботТхт($robotsTxt);
+		/* Б	*/	$сРоботы			=сПостроитьПакетДанныхРоботТхт($robotsTxt);
 		/* О	*/	fwrite($this->рПередача, $сРоботы, strlen($сРоботы));
 		/* Т	*/	fclose($this->рПередача);
 		/* Ы	*/	unset($сРоботы);
@@ -240,6 +240,7 @@ class Абхазия
 		}
 	public function _КИМ($strDirection='Start')
 		{
+		$this->мКИМ[$this->ч0КИМШаг][$strDirection][__CLASS__]			=__FUNCTION__;
 		switch($strDirection)
 			{
 			case 'Start':
@@ -262,7 +263,6 @@ class Абхазия
 				$this->ч0КИМШаг++;
 			break;
 			}
-		$this->мКИМ[$this->ч0КИМШаг][$strDirection][__CLASS__]			=__FUNCTION__;
 		}
 	public static function VoId()
 		{
