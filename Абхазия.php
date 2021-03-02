@@ -39,8 +39,8 @@ class Абхазия
 		//4.2.
 					
 					$this->сСтартЖурнала();
-					$this->мБуфферизация($objKIIM);
-		$this->мБуффер		=мБуфферизация($objKIIM);
+					$this->мБуфферизация();
+
 		$this->рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
 
 		while($this->рПередача = stream_socket_accept($this->рПриёмник, -1))
@@ -269,19 +269,19 @@ class Абхазия
 						$this->мКИМ[(($this->ч0КИМШаг-1)>0)?$this->ч0КИМШаг-1:$this->ч0КИМШаг]['End']['strTime']);
 			break;
 			case 'End':
-				$this->мКИМ[$this->ч0КИМШаг][$_strDirection]['strTime'] 		=сТекущееВремяСтемп();
-				$this->мКИМ[$this->ч0КИМШаг][$_strDirection]['strTimeDelta']= 
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTime'] 		=сТекущееВремяСтемп();
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTimeDelta']= 
 					($this->мКИМ[$this->ч0КИМШаг]['End']['strTime']-
 						$this->мКИМ[$this->ч0КИМШаг]['Start']['strTime']);
 
-				$this->мКИМ[$this->ч0КИМШаг][$_strDirection]['strTimeDeltaAll']= 
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTimeDeltaAll']= 
 					($this->мКИМ[$this->ч0КИМШаг]['End']['strTime']-
 						$this->мКИМ[0]['Start']['strTime']);
 
 				$this->ч0КИМШаг++;
 			break;
 			}
-		$this->мКИМ[$this->ч0КИМШаг][$_strDirection][__CLASS__]			=__FUNCTION__;
+		$this->мКИМ[$this->ч0КИМШаг][$strDirection][__CLASS__]			=__FUNCTION__;
 		}
 	public static function VoId()
 		{
