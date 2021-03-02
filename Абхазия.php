@@ -22,6 +22,7 @@ set_time_limit(0);
 
 class Абхазия
 	{
+	private $сЖурнал;
 	private $мКИМ		=array();
 	private $ч0КИМШаг	=0;
 	private $рПриёмник;
@@ -44,14 +45,14 @@ class Абхазия
 		$this->рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
 
 		while($this->рПередача = stream_socket_accept($this->рПриёмник, -1))
-			{/*DEBUG*/file_put_contents('x.txt', '	StartLIVE:			'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+			{
 
 			$this->objEDRO	=new Event();
 
 			if(isset($this->мЗаголовкиСлушателя[0]))
-				{/*DEBUG*/file_put_contents('x.txt', "\n".$_SERVER['strListener'].'	AfterReadListener:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+				{
 
-				$this->мЗаголовки		=мЗаголовкиЗапроса($мЗаголовкиСлушателя);
+				$this->мЗаголовки		=$this->мЗаголовкиЗапроса($мЗаголовкиСлушателя);
 				$this->сРасширение		=mb_strtolower(сКонцДоСимвола($this->мЗаголовки[1], '.'));
 			if(
 				isset($this->мЗаголовки[1])
@@ -70,18 +71,11 @@ class Абхазия
 				&&($this->сРасширение!="jpg")
     					)
 				{
-		/* H	*/	/*DEBUG*/file_put_contents('x.txt', $_SERVER['strListener'].'	Before push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-
-				$_SERVER['REQUEST_URI']		=$this->мЗаголовки[1];
+		/* H	*/	$_SERVER['REQUEST_URI']		=$this->мЗаголовки[1];
 				$_SERVER['REMOTE_ADDR']		='<ifEN>Temporary disabled</ifEN><ifRU>Временно отключено</ifRU>';
 		/* T	*/	$спДляОтправкиСлушателю		=сПостроитьПакетДанных($this->objEDRO);
-			
-		/* M	*/		
-				/*DEBUG*/file_put_contents('/home/EDRO.SetOfTools/DjService/Abhasia_debug.txt', $спДляОтправкиСлушателю);
-				fwrite($рПередача, $спДляОтправкиСлушателю, strlen($спДляОтправкиСлушателю));
+		/* M	*/	fwrite($рПередача, $спДляОтправкиСлушателю, strlen($спДляОтправкиСлушателю));
 		/* L	*/	fclose($рПередача);
-
-				/*DEBUG*/file_put_contents('x.txt', $_SERVER['strListener'].'	After push page:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 				unset($спДляОтправкиСлушателю);
 				}
 			elseif(
@@ -91,13 +85,9 @@ class Абхазия
 		/* А 	*/	&&($this->сРасширение!="jpg")
 					)
 				{
-		/* В	*/	/*DEBUG*/file_put_contents('x.txt', '	Before push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-
-		/* И	*/	$strICO						=сПостроитьПакетДанныхЛоготипИконка($faviconBin);
-				fwrite($this->рПередача, $strICO, strlen($strICO));
+		/* В	*/	$strICO				=сПостроитьПакетДанныхЛоготипИконка($faviconBin);
+		/* И	*/	fwrite($this->рПередача, $strICO, strlen($strICO));
 		/* К	*/	fclose($this->рПередача);
-
-		/* О	*/	/*DEBUG*/file_put_contents('x.txt', '	After push fav:'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
 				unset($strICO);
 				}
 			elseif(
@@ -107,13 +97,9 @@ class Абхазия
 				&&($this->сРасширение!="jpg")
 		/* О 	*/		)
 				{
-		/* Б	*/	/*DEBUG*/file_put_contents('x.txt', $_SERVER['strListener'].'	Before push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
-
-				$сРоботы					=сПостроитьПакетДанныхРоботТхт($robotsTxt);
+		/* Б	*/	$сРоботы					=сПостроитьПакетДанныхРоботТхт($robotsTxt);
 		/* О	*/	fwrite($this->рПередача, $сРоботы, strlen($сРоботы));
-				fclose($this->рПередача);
-		/* Т	*/	
-				/*DEBUG*/file_put_contents('x.txt', $_SERVER['strListener'].'	After push robots:				'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+		/* Т	*/	fclose($this->рПередача);
 		/* Ы	*/	unset($сРоботы);
 				}
 			else
