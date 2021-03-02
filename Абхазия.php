@@ -17,10 +17,21 @@
 //																	
 //																	
 set_time_limit(0);
+function _КИМ($_strDirection='Start')
+	{
+	$this->мКИМ[$this->ч0КИМШаг]['arrStart']['strTime'] 			=сТекущееВремяСтемп();
+	$this->мКИМ[$this->ч0КИМШаг]['arrStart']['strTimeDelta']		=сТекущееВремяСтемп();
+	$this->мКИМ[$this->ч0КИМШаг]['arrStart']['strTimeDeltaAll']		=сТекущееВремяСтемп();
+	$this->мКИМ[$this->ч0КИМШаг]['arrStart'][__CLASS__]			=сТекущееВремяСтемп();
+	$this->мКИМ[$this->ч0КИМШаг]['arrStart'][__FUNCTION__]			=сТекущееВремяСтемп();
+	$this->ч0КИМШаг++;
+	}
 Абхазия::VoId();
 
 class Абхазия
 	{
+	private $мКИМ		=array();
+	private $ч0КИМШаг	=0;
 	private $рПриёмник;
 	private $objEDRO;
 	private $мЗаголовки;
@@ -31,10 +42,12 @@ class Абхазия
 		//1.Load library
 		//2.Buffering load
 		//3.Create OS socket
-		//4.Make socket accessible and "Beat the foam"
+		//4.Make socket accessible and "Beat the cream"
 		//4.1.
-		//....
+		//4.2.
+					
 					$this->сСтартЖурнала();
+					$this->мБуфферизация($objKIIM);
 		$this->мБуффер		=мБуфферизация($objKIIM);
 		$this->рПриёмник	=рОрганизацияПриёмникаЗапросовСлушателя();
 
@@ -243,16 +256,44 @@ class Абхазия
 		}
 	public static function сСтартЖурнала()
 		{
-		$сТекущееВремяСтемпСтарт	=сТекущееВремяСтемп();
+		$this->_КИМ('Start');
+		
 		$сРасположениеСчётчикВход	='/home/EDRO.o2o/Countup/Вход.plmr';
 		$сРасположениеСчётчикВходИстор	='/home/EDRO.o2o/Countup/History/Вход.plmr';
 		$ч0СчётчикВход			=file_get_contents($сРасположениеСчётчикВход);
-				 file_put_contents($сРасположениеСчётчикВход, ($ч0СчётчикВход+1));
-				 /*DEBUG*/file_put_contents($сРасположениеСчётчикВходИстор,"\n=====\n".'	Start:		'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+						 file_put_contents($сРасположениеСчётчикВход, ($ч0СчётчикВход+1));
+						 /*DEBUG*/file_put_contents($сРасположениеСчётчикВходИстор,"\n=====\n".'	Start:		'.date("Y-m-d H:i:s")."\n", FILE_APPEND);
+		$this->_КИМ('End');
 		}
-	public static function VoId($objKIIM)
+	public function _КИМ($strDirection='Start')
 		{
-		$оАбхазия= new Абхазия($objKIIM);
+		switch($strDirection)
+			{
+			case 'Start':
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTime'] 			=сТекущееВремяСтемп();
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTimeDelta']		=0;
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTimeDeltaAll']= 
+					($this->мКИМ[$this->ч0КИМШаг]['Start']['strTime']-
+						$this->мКИМ[(($this->ч0КИМШаг-1)>0)?$this->ч0КИМШаг-1:$this->ч0КИМШаг]['End']['strTime']);
+			break;
+			case 'End':
+				$this->мКИМ[$this->ч0КИМШаг][$_strDirection]['strTime'] 		=сТекущееВремяСтемп();
+				$this->мКИМ[$this->ч0КИМШаг][$_strDirection]['strTimeDelta']= 
+					($this->мКИМ[$this->ч0КИМШаг]['End']['strTime']-
+						$this->мКИМ[$this->ч0КИМШаг]['Start']['strTime']);
+
+				$this->мКИМ[$this->ч0КИМШаг][$_strDirection]['strTimeDeltaAll']= 
+					($this->мКИМ[$this->ч0КИМШаг]['End']['strTime']-
+						$this->мКИМ[0]['Start']['strTime']);
+
+				$this->ч0КИМШаг++;
+			break;
+			}
+		$this->мКИМ[$this->ч0КИМШаг][$_strDirection][__CLASS__]			=__FUNCTION__;
+		}
+	public static function VoId()
+		{
+		$оАбхазия= new Абхазия();
 		}
 	}
 
