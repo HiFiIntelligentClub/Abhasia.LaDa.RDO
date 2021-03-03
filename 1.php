@@ -31,7 +31,7 @@ class EDRO
 	{
 	private $сЖурналРасположение	='/home/ЕДРО:ПОЛИМЕР/о2о.БазаДанных/HiFiIntelligentClub/Журнал';
 	private $ч0КИМШаг	=0;
-	private $рПриёмник;
+	private $rRadio;
 	private $рПередача;
 	private $мЗаголовки;
 	private $мБуффер	=array();
@@ -50,9 +50,9 @@ class EDRO
 		$мБуффер	=$this->мБуфферизация();
 				$this->_КИМ('End');
 
-		$this->рПриёмник	=$this->рОрганизацияПриёмникаЗапросовСлушателя();
+		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
 	//$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
-	/*E->*/	while(Event::_V($this->мКИМ, $this->рПриёмник))
+	/*E->*/	while(Event::_V($this->мКИМ, $this->$rRadio))
 			{
 			//$this->objEDRO			=new Event();
 			}
@@ -113,14 +113,14 @@ class EDRO
 						 /*DEBUG*/ file_put_contents($сРасположениеСчётчикВходИстор,"\n=====\n".'	Start:		'.date("Y-m-d H:i:s").сТекущееВремяСтемп()."\n", FILE_APPEND);
 		$this->_КИМ('End');
 		}
-	private function рОрганизацияПриёмникаЗапросовСлушателя()
+	private function rOrganiseListenersRadioRequests()
 		{
 		$this->_КИМ('Start');
 		//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://hifiintelligentclub.ru:80", $errno, $errstr);
 		//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://127.0.0.1:8080", $errno, $errstr);
-		$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://".strDomain().":80", $errno, $errstr);
+		 $rListenersRadioRequests	=stream_socket_server("tcp://".strDomain().":80", $errno, $errstr);
 		$this->_КИМ('End');
-		return $рПриёмникЗапросовСлушателя;
+		return $rListenersRadioRequests;
 		}
 	public static function VoId()
 		{
