@@ -30,11 +30,11 @@ require('/home/EDRO.SetOfTools/System/3.RAM/0.EDRO_Objects.php');
 //EDRO is the "Perfect Object".
 //КИМ in latin is KIIM Иcкуственный Интеллект Кирилл и Мефодий (). 
 
-/*_\\KIIM//__Start_____*/
-/*__\\  //___Checkpiont*/
-/*___\\//____Finish___ */
-/*____\/ECTOR <-->_____*/
-#if finish than compete if the result EXIST! Filosophy
+			/*_\\KIIM//__Start_____*/
+			/*__\\  //___Checkpiont*/
+			/*___\\//____Finish___ */
+			/*____\/ECTOR <-->_____*/
+	//if finish than compete if the result EXIST! Filosophy
 
 
 EDRO_Абхазия::VoId();
@@ -64,13 +64,12 @@ class EDRO_Абхазия
 
 		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
 		
-/*x1*/		$oEDRO	=Event::_V($this->мКИМ, $this->$rRadio);
+/*x1*/		$oEDRO	=Event::_V($this->мКИМ, $this->rRadio);
+		print_r($oEDRO);
 /*x2*/		while($oEDRO->arrEvent['rRadio'])
 			{
 			}
 /*x3*/		_Report('Cant organise listener radio!!!! Am failed');
-
-
 		/*if($oEDRO->arrEvent['rRadio']===FALSE)
 			{
 			}*/
@@ -82,8 +81,8 @@ class EDRO_Абхазия
 			{
 			case 'Start':
 
-				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTime'] 			=сТекущееВремяСтемп();
-				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTimeDelta']		=0;
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTime'] 		=сТекущееВремяСтемп();
+				$this->мКИМ[$this->ч0КИМШаг][$strDirection]['strTimeDelta']	=0;
 
 				$ч0ПредШаг	=(($this->ч0КИМШаг-1)>0)?$this->ч0КИМШаг-1:$this->ч0КИМШаг;
 
@@ -146,9 +145,13 @@ class EDRO_Абхазия
 		$this->_КИМ('End');
 		return $rListenersRadioRequests;
 		}
+	private function _WriteLog()
+		{
+		}
 	private function _ПредпусковаяПроверка()
 		{
-		
+		exec('ps -C 1.php| grep 1.php -c', $outPut);
+		print_r($outPut);
 		}
 	public static function VoId()
 		{
