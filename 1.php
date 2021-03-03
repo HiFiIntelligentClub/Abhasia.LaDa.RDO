@@ -32,8 +32,8 @@ class EDRO
 	private $сЖурналРасположение	='/home/ЕДРО:ПОЛИМЕР/о2о.БазаДанных/HiFiIntelligentClub/Журнал';
 	private $ч0КИМШаг	=0;
 	private $rRadio;
-	private $рПередача;
-	private $мЗаголовки;
+	//private $rTransmission; //Dj Feel the transmission. -> Transmission controller.
+	//private $mEventParams;
 	private $мБуффер	=array();
 	private $мКИМ		=array();
 	private $oEDRO;
