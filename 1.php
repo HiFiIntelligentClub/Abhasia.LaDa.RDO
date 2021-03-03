@@ -64,7 +64,10 @@ class EDRO_Абхазия
 
 		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
 
-/*EDRO->*/	Event::_V($this->мКИМ, $this->$rRadio);
+/*EDRO->*/	if(Event::_V($this->мКИМ, $this->$rRadio)->arrEvent['rRadio']===FALSE)
+			{
+			_Report('Cant organise listener radio!!!! Am failed');
+			}
 		}
 	public function _КИМ($strDirection='Start')
 		{
