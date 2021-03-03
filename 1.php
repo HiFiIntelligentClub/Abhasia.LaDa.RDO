@@ -28,12 +28,21 @@ require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 //FC10 FFFFFCCCCC. 5F - is the mp3 stream divider in to audio frames in lame 100. +5C is winter temperature in Sochi, 
 //so to make frames of content without interception with mp3 Lame3.100 we use CCCCC. Also. CC the fly, was sterialized by Soviet scientists.
 //EDRO is the "Perfect Object".
-EDRO::VoId();
+//КИМ in latin is KIIM Иcкуственный Интеллект Кирилл и Мефодий (). 
 
-class EDRO
+/*_\\KIIM//__Start_____*/
+/*__\\  //___Checkpiont*/
+/*___\\//____Finish___ */
+/*____\/ECTOR <-->_____*/
+
+
+
+EDRO_Абхазия::VoId();
+
+class EDRO_Абхазия
 	{
 	private $сЖурналРасположение	='/home/ЕДРО:ПОЛИМЕР/о2о.БазаДанных/HiFiIntelligentClub/Журнал';
-	private $ч0КИМШаг	=0;
+	private $ч0КИМШаг		=0;
 	private $rRadio;
 	//private $rTransmission; //Dj Feel the transmission. -> Transmission controller.
 	//private $mEventParams;
@@ -50,15 +59,12 @@ class EDRO
 		//4.2.
 				$this->_КИМ('Start');
 				$this->_СтартЖурнала();
-		$мБуффер	=$this->мБуфферизация();
+		$arRAM		=$this->mReadStatic();
 				$this->_КИМ('End');
 
 		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
-	//$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
-	/*E->*/	while(Event::_V($this->мКИМ, $this->$rRadio))
-			{
-			//$this->objEDRO			=new Event();
-			}
+
+/*EDRO->*/	Event::_V($this->мКИМ, $this->$rRadio);
 		}
 	public function _КИМ($strDirection='Start')
 		{
@@ -95,7 +101,7 @@ class EDRO
 			_Report('Не могу записать: '.$this->сЖурналРасположение.'/КИМ/КИМ.txt');
 			}
 		}
-	private function мБуфферизация()
+	private function mReadStatic()
 		{
 		$this->_КИМ('Start');
 		$м	=array();
@@ -121,13 +127,23 @@ class EDRO
 		$this->_КИМ('Start');
 		//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://hifiintelligentclub.ru:80", $errno, $errstr);
 		//$рПриёмникЗапросовСлушателя	=stream_socket_server("tcp://127.0.0.1:8080", $errno, $errstr);
-		 $rListenersRadioRequests	=stream_socket_server("tcp://".strDomain().":80", $errno, $errstr);
+		$rListenersRadioRequests	=stream_socket_server("tcp://".strDomain().":80", $errno, $errstr);
+		if($rListenersRadioRequests===FALSE)
+			{
+			usleep(100000);
+			$this->rOrganiseListenersRadioRequests();
+			_Report('rOrganiseListenersRadioRequests() failed. Restarting after 0,1 s. delay.');
+			}
 		$this->_КИМ('End');
 		return $rListenersRadioRequests;
 		}
+	private function _ПредпусковаяПроверка()
+		{
+		
+		}
 	public static function VoId()
 		{
-		$oEDRO= new EDRO();
+		$oEDRO= new EDRO_Абхазия();
 		$oEDRO->_WriteLog();
 		}
 	}
