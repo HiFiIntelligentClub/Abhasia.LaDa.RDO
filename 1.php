@@ -52,7 +52,7 @@ class EDRO
 
 		$this->рПриёмник	=$this->рОрганизацияПриёмникаЗапросовСлушателя();
 	//$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
-	/*E->*/	while(Event::Serve($this->мКИМ, $this->рПриёмник))
+	/*E->*/	while(Event::_V($this->мКИМ, $this->рПриёмник))
 			{
 			//$this->objEDRO			=new Event();
 			}
@@ -125,11 +125,7 @@ class EDRO
 	public static function VoId()
 		{
 		$oEDRO= new EDRO();
-		}
-	public static function logFile()
-		{
-		$oEDRO= new EDRO();
-		/**/
+		$oEDRO->_WriteLog();
 		}
 	}
 ?>
