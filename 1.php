@@ -67,7 +67,6 @@ class EDRO_Абхазия
 		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
 		
 /*x1*/		$oEDRO	=Event::_V($this->мКИМ, $this->rRadio);
-		print_r($oEDRO);
 /*x2*/		while($oEDRO->arrEvent['rRadio'])
 			{
 			}
@@ -152,17 +151,17 @@ class EDRO_Абхазия
 		}
 	private function _ПредпусковаяПроверка()
 		{
-		exec('ps -C 1.php| grep 1.php -c', $outPut);
+		exec('ps -C 1.php| grep 1.php -c', $output);
 		if(
-			isset($outPut[0])&&
-			$outPut[0]==1
+			isset($output[0])&&
+			$output[0]==1
 				)
 			{
 			}
 		else
 			{
 			_Report('_ПредпусковаяПроверка() failed.');
-			exit;
+			exit; //Here comes the unsuccessfull run 
 			}
 		}
 	public static function VoId()
