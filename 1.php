@@ -23,7 +23,7 @@ require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
 require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
 require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
 //require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
-require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
+require('/home/EDRO.SetOfTools/System/3.RAM/0.EDRO_Objects.php');
 //Armada or array? "ar" prefix.:)
 //FC10 FFFFFCCCCC. 5F - is the mp3 stream divider in to audio frames in lame 100. +5C is winter temperature in Sochi, 
 //so to make frames of content without interception with mp3 Lame3.100 we use CCCCC. Also. CC the fly, was sterialized by Soviet scientists.
@@ -34,7 +34,7 @@ require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 /*__\\  //___Checkpiont*/
 /*___\\//____Finish___ */
 /*____\/ECTOR <-->_____*/
-
+#if finish than compete if the result EXIST! Filosophy
 
 
 EDRO_Абхазия::VoId();
@@ -59,15 +59,21 @@ class EDRO_Абхазия
 		//4.2.
 				$this->_КИМ('Start');
 				$this->_СтартЖурнала();
-		$arRAM		=$this->mReadStatic();
+		$this->arRAM	=$this->mReadStatic();
 				$this->_КИМ('End');
 
 		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
-
-/*EDRO->*/	if(Event::_V($this->мКИМ, $this->$rRadio)->arrEvent['rRadio']===FALSE)
+		
+/*x1*/		$oEDRO	=Event::_V($this->мКИМ, $this->$rRadio);
+/*x2*/		while($oEDRO->arrEvent['rRadio'])
 			{
-			_Report('Cant organise listener radio!!!! Am failed');
 			}
+/*x3*/		_Report('Cant organise listener radio!!!! Am failed');
+
+
+		/*if($oEDRO->arrEvent['rRadio']===FALSE)
+			{
+			}*/
 		}
 	public function _КИМ($strDirection='Start')
 		{
