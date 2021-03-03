@@ -58,9 +58,11 @@ class EDRO_Абхазия
 		//4.1.
 		//4.2.
 				$this->_КИМ('Start');
+				$this->_ПредпусковаяПроверка();
 				$this->_СтартЖурнала();
 		$this->arRAM	=$this->mReadStatic();
 				$this->_КИМ('End');
+		
 
 		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
 		
@@ -151,7 +153,17 @@ class EDRO_Абхазия
 	private function _ПредпусковаяПроверка()
 		{
 		exec('ps -C 1.php| grep 1.php -c', $outPut);
-		print_r($outPut);
+		if(
+			isset($outPut[0])&&
+			$outPut[0]==1
+				)
+			{
+			}
+		else
+			{
+			_Report('_ПредпусковаяПроверка() failed.');
+			exit;
+			}
 		}
 	public static function VoId()
 		{
