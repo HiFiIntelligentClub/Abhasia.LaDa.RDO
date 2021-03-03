@@ -52,7 +52,7 @@ class Абхазия
 
 		$this->рПриёмник	=$this->рОрганизацияПриёмникаЗапросовСлушателя();
 //$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
-	/*E->*/	while(Event::Init())
+	/*E->*/	while(Event::Serve($this->мКИМ, $this->рПриёмник))
 			{
 			//$this->objEDRO			=new Event();
 			}
