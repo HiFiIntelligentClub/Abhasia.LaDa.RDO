@@ -25,9 +25,9 @@ require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
 //require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
 
-Абхазия::VoId();
+EDRO::VoId();
 
-class Абхазия
+class EDRO
 	{
 	private $сЖурналРасположение	='/home/ЕДРО:ПОЛИМЕР/о2о.БазаДанных/HiFiIntelligentClub/Журнал';
 	private $ч0КИМШаг	=0;
@@ -36,7 +36,7 @@ class Абхазия
 	private $мЗаголовки;
 	private $мБуффер	=array();
 	private $мКИМ		=array();
-	private $objEDRO;
+	private $oEDRO;
 	public function __construct()
 		{
 		//1.Load library
@@ -51,7 +51,7 @@ class Абхазия
 				$this->_КИМ('End');
 
 		$this->рПриёмник	=$this->рОрганизацияПриёмникаЗапросовСлушателя();
-//$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
+	//$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
 	/*E->*/	while(Event::Serve($this->мКИМ, $this->рПриёмник))
 			{
 			//$this->objEDRO			=new Event();
@@ -124,11 +124,11 @@ class Абхазия
 		}
 	public static function VoId()
 		{
-		$оАбхазия= new Абхазия();
+		$oEDRO= new EDRO();
 		}
 	public static function logFile()
 		{
-		$оАбхазия= new Абхазия();
+		$oEDRO= new EDRO();
 		/**/
 		}
 	}
