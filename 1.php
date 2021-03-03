@@ -51,12 +51,10 @@ class Абхазия
 				$this->_КИМ('End');
 
 		$this->рПриёмник	=$this->рОрганизацияПриёмникаЗапросовСлушателя();
-	/*E->*/	while($this->рПередача  =stream_socket_accept($this->рПриёмник, -1))
+//$this->рПередача  =stream_socket_accept($this->рПриёмник, -1)
+	/*E->*/	while(Event::Init())
 			{
-	/*R->*/		$this->мЗаголовкиСлушателя	=$this->мЧтениеЗапросаИзБраузераСлушателя($this->рПередача);
-	/*R->*/		$this->мЗаголовки		=$this->мЗаголовкиЗапроса($this->мЗаголовкиСлушателя);
-	/*R->*/		$this->сРасширение		=mb_strtolower(сКонцДоСимвола($this->мЗаголовки[1], '.'));
-			$this->objEDRO			=new Event();
+			//$this->objEDRO			=new Event();
 			}
 		}
 	public function _КИМ($strDirection='Start')
