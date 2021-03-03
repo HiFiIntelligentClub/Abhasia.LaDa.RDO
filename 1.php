@@ -24,7 +24,10 @@ require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
 require('/home/EDRO.SetOfTools/System/0.Functions/2.Dyn.php');
 //require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 require('/home/EDRO.SetOfTools/System/3.Buffer/1.EDRO_Buffering.php');
-
+//Armada or array? "ar" prefix.:)
+//FC10 FFFFFCCCCC. 5F - is the mp3 stream divider in to audio frames in lame 100. +5C is winter temperature in Sochi, 
+//so to make frames of content without interception with mp3 Lame3.100 we use CCCCC. Also. CC the fly, was sterialized by Soviet scientists.
+//EDRO is the "Perfect Object".
 EDRO::VoId();
 
 class EDRO
@@ -34,7 +37,7 @@ class EDRO
 	private $rRadio;
 	//private $rTransmission; //Dj Feel the transmission. -> Transmission controller.
 	//private $mEventParams;
-	private $мБуффер	=array();
+	private $arRAM		=array();
 	private $мКИМ		=array();
 	private $oEDRO;
 	public function __construct()
