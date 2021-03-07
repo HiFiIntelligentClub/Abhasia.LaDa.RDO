@@ -16,6 +16,8 @@
 //																	
 //																	
 //																	
+//				VVVVVVREMEBERVVVVV
+//////////////////////////_ПредпусковаяПроверка()
 set_time_limit(0);
 
 require('/home/EDRO.SetOfTools/System/0.Functions/0.Functions.php');
@@ -71,9 +73,6 @@ class EDRO_Абхазия
 			{
 			}
 /*x3*/		_Report('Cant organise listener radio!!!! Am failed');
-		/*if($oEDRO->arrEvent['rRadio']===FALSE)
-			{
-			}*/
 		}
 	public function _КИМ($strDirection='Start')
 		{
@@ -145,6 +144,42 @@ class EDRO_Абхазия
 			}
 		$this->_КИМ('End');
 		return $rListenersRadioRequests;
+		}
+	protected function сПостроитьПакетДанныхЛоготипКартинка($strJPG)
+		{
+		//$strJPG		=file_get_contents('/home/HiFiIntelligentClub.Ru/Hfic_Samin.jpg');
+		return 			"HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strJPG)."\r\nConnection: close\r\n\r\n".$strJPG;
+		}
+	protected function сПостроитьПакетДанныхЛоготипИконка($faviconBin)
+		{
+		//$faviconBin		=file_get_contents('/home/HiFiIntelligentClub.Ru/favicon.png');
+		return			"HTTP/1.1 200 OK\r\nContent-Type: image/ico\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($faviconBin)."\r\nConnection: close\r\n\r\n".$faviconBin;
+		}
+	protected function сПостроитьПакетДанныхРоботТхт($robotsTxt)
+		{
+		//$robotsTxt		=file_get_contents('/home/HiFiIntelligentClub.Ru/robots.txt');
+		 return			"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($robotsTxt)."\r\nConnection: close\r\n\r\n".$robotsTxt;
+		}
+	protected function сПостроитьПакетДанных($_objKIIM, $objEDRO)
+		{
+		$strContentType		='Content-Type: text/html';
+		$strNextDate		=date(DATE_RFC822, mktime(0, 0, 0, date("m")  , date("d"), date("Y")+1));
+		// "set-cookie: username=aaa13; expires=friday,31-dec-99 23:59:59 gmt; path=/win/internet/html/; domain=citforum.ru;nn";
+
+		//echo $objEDRO->arrDesign['strTemplate']."\n"; 
+	
+		require			$this->arrDesign['strTemplate'];
+		$strBuffer		=str_replace("\r\n\r\n", "", $str);
+		unset($str);
+		if($objEDRO->arrEvent['bIzDynamic'])
+		    	{
+			}
+		else
+			{
+			$strBuffer		.='</body>';
+			$strBuffer		.='</html>';
+			}
+		return 	    		"HTTP/1.1 200 OK\r\n".$strContentType."\r\nServer-name: Abhasia LaDa.Rdo\r\nContent-Length: ".strlen($strBuffer)."\r\n".$strCookie."\r\nConnection: close\r\n\r\n".$strBuffer;
 		}
 	private function _WriteLog()
 		{
