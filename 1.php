@@ -65,12 +65,15 @@ class EDRO_Абхазия
 		$this->arRAM	=$this->mReadStatic();
 				$this->_КИМ('End');
 		
-
-		$this->rRadio	=$this->rOrganiseListenersRadioRequests();
-		
-/*x1*/		$oEDRO	=Event::_V($this->мКИМ, $this->rRadio);
-/*x2*/		while($oEDRO->arrEvent['rRadio'])
+		while(true)
 			{
+			$this->rRadio	= $this->rOrganiseListenersRadioRequests();
+//		
+/*x1*/			$oEDRO		= Event::_V($this->мКИМ, $this->rRadio);
+/*x2*/			while($oEDRO->arrEvent['rRadio'])
+				{
+				}
+			_Report('Lost radio concrette!!!!');
 			}
 /*x3*/		_Report('Cant organise listener radio!!!! Am failed');
 		}
@@ -119,6 +122,9 @@ class EDRO_Абхазия
 		$this->_КИМ('End');
 		return $м;
 		}
+//	private function _CheckStart()
+//		{
+//		}
 	public function _СтартЖурнала()
 		{
 		$this->_КИМ('Start');
