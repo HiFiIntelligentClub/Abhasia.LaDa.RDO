@@ -64,18 +64,18 @@ class EDRO_Абхазия
 				$this->_СтартЖурнала();
 		$this->arRAM	=$this->mReadStatic();
 				$this->_КИМ('End');
-		
+		$int0Attempts	= 0;
 		while(true)
 			{
 			$this->rRadio	= $this->rOrganiseListenersRadioRequests();
-//		
 /*x1*/			$oEDRO		= Event::_V($this->мКИМ, $this->rRadio);
 /*x2*/			while($oEDRO->arrEvent['rRadio'])
 				{
 				}
-			_Report('Lost radio concrette!!!!');
+			_Report('Lost radio concrette!!!! AttemptsFromZero: '.$int0Attempts);
+			$int0Attempts++;
 			}
-/*x3*/		_Report('Cant organise listener radio!!!! Am failed');
+/*x3*/		_Report('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Exiting forever circle');
 		}
 	public function _КИМ($strDirection='Start')
 		{
