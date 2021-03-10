@@ -19,10 +19,12 @@
 //				VVVVVVREMEBERVVVVV
 //////////////////////////_ПредпусковаяПроверка()
 set_time_limit(0);
+require('/home/EDRO.SetOfTools/System/1.Reporter/0.ReportError.php');
+require('/home/EDRO.SetOfTools/System/1.Reporter/1.Report.php');
 require('/home/EDRO.SetOfTools/System/0.Functions/1.FunctionsSetup.php');
 require('/home/EDRO.SetOfTools/System/0.Functions/2.StringFunctions.php');
-require('/home/EDRO.SetOfTools/System/1.Reporter/3.Platforms.php');
-require('/home/EDRO.SetOfTools/System/1.Reporter/4.Functions.php');
+require('/home/EDRO.SetOfTools/System/0.Functions/3.Platforms.php');
+require('/home/EDRO.SetOfTools/System/0.Functions/4.Functions.php');
 require('/home/EDRO.SetOfTools/System/0.Functions/5.Dyn.php');
 //require('/home/EDRO.SetOfTools/System/2.VectorKIIM/0.KIIM.php');
 require('/home/EDRO.SetOfTools/System/3.RAM/0.EDRO_Objects.php');
