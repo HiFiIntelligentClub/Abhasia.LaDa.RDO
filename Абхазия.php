@@ -18,7 +18,7 @@
 //																	
 set_time_limit(0);
 
-Абхазия::VoId();
+Абхазия::VOID();
 
 class Абхазия
 	{
@@ -264,7 +264,7 @@ exit;
 			break;
 			}
 		}
-	public static function VoId()
+	public static function VOID()
 		{
 		$оАбхазия= new Абхазия();
 		}
