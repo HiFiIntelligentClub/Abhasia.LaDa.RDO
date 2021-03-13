@@ -41,7 +41,7 @@ require('/home/EDRO.SetOfTools/System/3.RAM/0.EDRO_Objects.php');
 	//if finish than compete if the result EXIST! Filosophy
 
 //exec('/home/EDRO.SetOfTools/DjService/test.sh');
-EDRO_Абхазия::VoId();
+EDRO_Абхазия::BIDVO();
 
 class EDRO_Абхазия
 	{
@@ -207,7 +207,7 @@ class EDRO_Абхазия
 			exit; //Here comes the unsuccessfull run 
 			}
 		}
-	public static function VoId()
+	public static function BIDVO()
 		{
 		$oEDRO= new EDRO_Абхазия();
 		$oEDRO->_WriteLog();
